@@ -22,7 +22,7 @@ class User {
             // Insert new user
             $stmt = $this->pdo->prepare("
                 INSERT INTO users (name, email, password, created_at, updated_at) 
-                VALUES (?, ?, ?, NOW(), NOW())
+                VALUES (?, ?, ?, datetime('now'), datetime('now'))
             ");
             
             $stmt->execute([$name, $email, $hashedPassword]);
@@ -35,7 +35,7 @@ class User {
 
     public function authenticate($email, $password) {
         try {
-            $stmt = $this->pdo->prepare("SELECT id, password, name FROM users WHERE email = ?");
+            $stmt = $this->pdo->prepare("SELECT id, password, name, credit_score FROM users WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -43,7 +43,8 @@ class User {
                 return [
                     'success' => true,
                     'user_id' => $user['id'],
-                    'name' => $user['name']
+                    'name' => $user['name'],
+                    'credit_score' => $user['credit_score']
                 ];
             }
             return ['error' => 'Invalid email or password'];
@@ -55,7 +56,7 @@ class User {
 
     public function getById($id) {
         try {
-            $stmt = $this->pdo->prepare("SELECT id, name, email, created_at FROM users WHERE id = ?");
+            $stmt = $this->pdo->prepare("SELECT id, name, email, credit_score, created_at FROM users WHERE id = ?");
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -76,7 +77,7 @@ class User {
             }
             $values[] = $id;
 
-            $sql = "UPDATE users SET " . implode(', ', $fields) . ", updated_at = NOW() WHERE id = ?";
+            $sql = "UPDATE users SET " . implode(', ', $fields) . ", updated_at = datetime('now') WHERE id = ?";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($values);
 
