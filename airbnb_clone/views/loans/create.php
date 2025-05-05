@@ -33,6 +33,19 @@
                         </div>
                     </div>
 
+                    <!-- Loan Term -->
+                    <div>
+                        <label for="term_months" class="block text-sm font-medium text-gray-700">
+                            Loan Term (months)
+                        </label>
+                        <div class="mt-1">
+                            <input type="number" name="term_months" id="term_months" min="1" max="360"
+                                   class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                   value="<?php echo isset($_SESSION['old_input']['term_months']) ? htmlspecialchars($_SESSION['old_input']['term_months']) : ''; ?>"
+                                   required>
+                        </div>
+                    </div>
+
                     <!-- Due Date -->
                     <div>
                         <label for="due_date" class="block text-sm font-medium text-gray-700">
