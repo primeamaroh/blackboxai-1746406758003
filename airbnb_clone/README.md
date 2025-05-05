@@ -1,18 +1,18 @@
-# Airbnb Clone
+# LendConnect - P2P Lending Platform
 
-A simplified Airbnb clone built with PHP, MySQL, and Tailwind CSS. This project includes user authentication, property listings, booking management, and a responsive design.
+A modern peer-to-peer lending platform built with PHP, MySQL, and Tailwind CSS. This platform enables users to request and fund loans, with support for both collateral and non-collateral based lending.
 
 ## Features
 
-- 🏠 Property listing and search
-- 👤 User registration and authentication
-- 📅 Booking system
-- 💳 Price calculation
+- 💰 Loan request creation and management
+- 🏠 Property-backed collateral loans
+- 📊 Credit score integration
+- 💸 Partial funding support
 - 📱 Responsive design
 - 🎨 Modern UI with Tailwind CSS
-- 🔒 Secure password hashing
-- 🗺️ Location-based search
-- 📸 Image gallery for properties
+- 🔒 Secure transaction handling
+- 📈 Interest rate calculation
+- 🏦 Defaulted property marketplace
 
 ## Prerequisites
 
@@ -52,10 +52,16 @@ define('DB_PASS', 'your_password');
 ## Project Structure
 
 ```
-airbnb_clone/
+lendconnect/
 ├── app/
 │   ├── controllers/    # Application controllers
+│   │   ├── LoanController.php
+│   │   ├── UserController.php
+│   │   └── PropertyController.php
 │   ├── models/        # Database models
+│   │   ├── Loan.php
+│   │   ├── User.php
+│   │   └── Property.php
 │   └── routes.php     # Route definitions
 ├── config/
 │   └── database.php   # Database configuration
@@ -64,8 +70,12 @@ airbnb_clone/
 │   └── .htaccess     # URL rewriting rules
 └── views/
     ├── auth/          # Authentication views
+    ├── loans/         # Loan-related views
+    │   ├── list.php
+    │   ├── detail.php
+    │   ├── create.php
+    │   └── for-sale.php
     ├── properties/    # Property-related views
-    ├── bookings/      # Booking-related views
     ├── error/         # Error pages
     └── layouts/       # Common layout files
 ```
@@ -74,48 +84,161 @@ airbnb_clone/
 
 1. Start your Apache server and MySQL database
 
-2. Access the application through your web browser:
+2. Access the platform through your web browser:
 ```
-http://localhost/airbnb-clone/
+http://localhost/lendconnect/
 ```
 
 3. Register a new account or use the demo accounts:
-- Email: john@example.com
-- Password: password
+- Borrower Account:
+  - Email: john@example.com
+  - Password: password
+  - Credit Score: 720
+- Lender Account:
+  - Email: jane@example.com
+  - Password: password
+  - Credit Score: 680
 
 ## Features in Detail
 
-### User Authentication
-- User registration with email
-- Secure password hashing
-- Session-based authentication
-- Password reset functionality (coming soon)
+### User Authentication & Profile
+- User registration with credit score integration
+- Secure password hashing and session management
+- Separate borrower and lender dashboards
+- Credit score tracking and history
 
-### Property Management
-- Property listing creation
-- Image upload support
-- Detailed property views
-- Search and filtering options
+### Loan Management
+- Create and manage loan requests
+- Set flexible interest rates and terms
+- Track funding progress in real-time
+- Automated payment calculations
+- Late payment handling
+- Manage loan status and payments
 
-### Booking System
-- Date-based availability
-- Price calculation
-- Booking management
-- Cancellation support
+### Property Collateral System
+- Add and manage property collateral
+- Property valuation tracking
+- Defaulted property marketplace
+- Automated collateral claim processing
+- Property inspection reports
+- Title verification system
 
-### User Interface
-- Responsive design
-- Modern UI components
-- Interactive elements
-- Mobile-friendly layout
+### Security & Compliance Features
+- Secure transaction processing
+- Credit score verification
+- KYC documentation support
+- Anti-fraud measures
+- PDO prepared statements for SQL injection prevention
+- XSS protection and CSRF tokens
+- Secure session management
 
-## Security Features
+## Platform Workflow
 
-- Password hashing using PHP's password_hash()
-- SQL injection prevention using PDO prepared statements
-- XSS protection with output escaping
-- CSRF protection for forms
-- Secure session handling
+### For Borrowers
+1. Registration & Verification
+   - Create an account
+   - Complete profile with credit score
+   - Add properties for collateral (optional)
+
+2. Loan Request
+   - Specify loan amount and terms
+   - Choose collateral/no-collateral
+   - Set interest rate
+   - Submit for funding
+
+3. Loan Management
+   - Track funding progress
+   - Receive notifications
+   - Make payments
+   - Monitor loan status
+
+### For Lenders
+1. Account Setup
+   - Register as a lender
+   - Verify identity
+   - Set investment preferences
+
+2. Investment Process
+   - Browse loan requests
+   - Review borrower profiles
+   - Assess risk factors
+   - Fund loans (partial or full)
+
+3. Portfolio Management
+   - Track investments
+   - Monitor repayments
+   - Handle defaulted loans
+   - Access collateral marketplace
+
+## Technical Documentation
+
+### API Endpoints
+
+#### Loan Management
+```
+GET    /loans                 # List all loans
+GET    /loans?type=collateral # List collateral loans
+GET    /loans?type=no_collateral # List no-collateral loans
+POST   /loan/create          # Create new loan request
+GET    /loan/{id}            # Get loan details
+POST   /loan/fund/{id}       # Fund a loan
+GET    /my-loans             # Get user's loans
+GET    /for-sale             # Get defaulted properties
+```
+
+#### User Management
+```
+POST   /register             # Create new account
+POST   /login               # Authenticate user
+GET    /profile             # Get user profile
+PUT    /profile             # Update user profile
+GET    /credit-score        # Get user's credit score
+```
+
+#### Property Management
+```
+GET    /properties          # List user's properties
+POST   /property/create     # Add new property
+GET    /property/{id}       # Get property details
+PUT    /property/{id}       # Update property
+DELETE /property/{id}       # Remove property
+```
+
+### Database Schema
+```sql
+users
+  - id (PK)
+  - name
+  - email
+  - password
+  - credit_score
+  - created_at
+  - updated_at
+
+loans
+  - id (PK)
+  - borrower_id (FK)
+  - loan_amount
+  - funded_amount
+  - interest_rate
+  - term_months
+  - has_collateral
+  - property_id (FK)
+  - status
+  - due_date
+  - created_at
+  - updated_at
+
+properties
+  - id (PK)
+  - user_id (FK)
+  - title
+  - description
+  - location
+  - estimated_value
+  - image_url
+  - created_at
+```
 
 ## Contributing
 
@@ -138,11 +261,11 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Future Enhancements
 
-- [ ] Add payment integration
-- [ ] Implement real-time messaging
-- [ ] Add email notifications
-- [ ] Enhance search functionality
-- [ ] Add user reviews and ratings
-- [ ] Implement social login
-- [ ] Add property amenities management
-- [ ] Implement host dashboard
+- [ ] Add payment gateway integration
+- [ ] Implement automated credit scoring
+- [ ] Add email notifications for loan status
+- [ ] Enhance risk assessment algorithms
+- [ ] Add user reputation system
+- [ ] Implement KYC verification
+- [ ] Add loan portfolio analytics
+- [ ] Implement lender dashboard
