@@ -3,59 +3,86 @@
     <div class="text-center">
         <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
             <span class="block">Welcome to</span>
-            <span class="block text-red-600">AirbnbClone</span>
+            <span class="block text-blue-600">LendConnect</span>
         </h1>
         <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-            Find the perfect place to stay at an amazing price in over 191 countries.
+            Connect borrowers and lenders directly. Get better rates, flexible terms, and quick funding decisions.
         </p>
         <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
             <div class="rounded-md shadow">
-                <a href="?page=properties" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 md:py-4 md:text-lg md:px-10">
-                    Browse Properties
+                <a href="?page=loans" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
+                    Browse Loans
                 </a>
             </div>
             <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                <a href="?page=register" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-red-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
-                    Sign Up
+                <a href="?page=register" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
+                    Get Started
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Featured Locations -->
+    <!-- Loan Types -->
     <div class="mt-16">
-        <h2 class="text-2xl font-bold text-gray-900 mb-8">Popular Destinations</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Location Card 1 -->
-            <div class="relative rounded-lg overflow-hidden">
-                <img src="https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg" alt="Malibu" class="w-full h-64 object-cover">
-                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                    <div class="text-center">
-                        <h3 class="text-xl font-bold text-white">Malibu</h3>
-                        <p class="text-white">California, USA</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-8">Available Loan Types</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- No Collateral Loans -->
+            <div class="relative rounded-lg overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-lg transition-shadow">
+                <div class="p-8">
+                    <div class="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6">
+                        <i class="fas fa-file-signature text-2xl text-blue-600"></i>
                     </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">No Collateral Loans</h3>
+                    <p class="text-gray-600 mb-6">
+                        Quick personal loans based on your credit score. No assets required as security.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-600 mb-6">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            Fast approval process
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            Flexible repayment terms
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            Competitive interest rates
+                        </li>
+                    </ul>
+                    <a href="?page=loans&type=no_collateral" class="inline-flex items-center text-blue-600 hover:text-blue-700">
+                        View Available Loans <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
             </div>
 
-            <!-- Location Card 2 -->
-            <div class="relative rounded-lg overflow-hidden">
-                <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg" alt="New York" class="w-full h-64 object-cover">
-                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                    <div class="text-center">
-                        <h3 class="text-xl font-bold text-white">New York</h3>
-                        <p class="text-white">New York, USA</p>
+            <!-- Collateral Loans -->
+            <div class="relative rounded-lg overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-lg transition-shadow">
+                <div class="p-8">
+                    <div class="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6">
+                        <i class="fas fa-home text-2xl text-blue-600"></i>
                     </div>
-                </div>
-            </div>
-
-            <!-- Location Card 3 -->
-            <div class="relative rounded-lg overflow-hidden">
-                <img src="https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg" alt="Aspen" class="w-full h-64 object-cover">
-                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                    <div class="text-center">
-                        <h3 class="text-xl font-bold text-white">Aspen</h3>
-                        <p class="text-white">Colorado, USA</p>
-                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Property-Backed Loans</h3>
+                    <p class="text-gray-600 mb-6">
+                        Secure better rates by using your property as collateral. Higher loan amounts available.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-600 mb-6">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            Lower interest rates
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            Higher borrowing limits
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            Extended repayment periods
+                        </li>
+                    </ul>
+                    <a href="?page=loans&type=collateral" class="inline-flex items-center text-blue-600 hover:text-blue-700">
+                        View Available Loans <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -63,39 +90,60 @@
 
     <!-- Why Choose Us -->
     <div class="mt-16">
-        <h2 class="text-2xl font-bold text-gray-900 mb-8">Why Choose Us</h2>
+        <h2 class="text-2xl font-bold text-gray-900 mb-8">Why Choose LendConnect</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Feature 1 -->
             <div class="text-center">
-                <div class="inline-flex items-center justify-center h-12 w-12 rounded-md bg-red-100 text-red-600 mb-4">
-                    <i class="fas fa-home text-2xl"></i>
+                <div class="inline-flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600 mb-4">
+                    <i class="fas fa-bolt text-2xl"></i>
                 </div>
-                <h3 class="text-lg font-medium text-gray-900">Unique Places to Stay</h3>
+                <h3 class="text-lg font-medium text-gray-900">Quick Funding</h3>
                 <p class="mt-2 text-base text-gray-500">
-                    From treehouses to luxury homes, find the perfect place for your next stay.
+                    Get your loan funded quickly through our network of verified lenders.
                 </p>
             </div>
 
             <!-- Feature 2 -->
             <div class="text-center">
-                <div class="inline-flex items-center justify-center h-12 w-12 rounded-md bg-red-100 text-red-600 mb-4">
+                <div class="inline-flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600 mb-4">
                     <i class="fas fa-shield-alt text-2xl"></i>
                 </div>
-                <h3 class="text-lg font-medium text-gray-900">Trusted Platform</h3>
+                <h3 class="text-lg font-medium text-gray-900">Secure Platform</h3>
                 <p class="mt-2 text-base text-gray-500">
-                    Verified hosts, guest reviews, and 24/7 customer support.
+                    Bank-level security with verified users and secure transactions.
                 </p>
             </div>
 
             <!-- Feature 3 -->
             <div class="text-center">
-                <div class="inline-flex items-center justify-center h-12 w-12 rounded-md bg-red-100 text-red-600 mb-4">
-                    <i class="fas fa-wallet text-2xl"></i>
+                <div class="inline-flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600 mb-4">
+                    <i class="fas fa-percentage text-2xl"></i>
                 </div>
-                <h3 class="text-lg font-medium text-gray-900">Best Value</h3>
+                <h3 class="text-lg font-medium text-gray-900">Better Rates</h3>
                 <p class="mt-2 text-base text-gray-500">
-                    Find places within your budget with no hidden fees.
+                    Competitive interest rates with no hidden fees or charges.
                 </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="mt-16 bg-blue-600 rounded-lg shadow-xl overflow-hidden">
+        <div class="px-6 py-12 md:px-12 text-center md:text-left md:flex md:items-center md:justify-between">
+            <div class="md:flex-1">
+                <h2 class="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+                    Ready to get started?
+                </h2>
+                <p class="mt-3 text-lg text-blue-100">
+                    Join thousands of borrowers and lenders on our platform.
+                </p>
+            </div>
+            <div class="mt-8 md:mt-0 md:ml-8">
+                <div class="rounded-md shadow">
+                    <a href="?page=register" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 md:py-4 md:text-lg md:px-10">
+                        Create Account
+                    </a>
+                </div>
             </div>
         </div>
     </div>
