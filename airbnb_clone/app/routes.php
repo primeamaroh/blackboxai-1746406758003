@@ -3,21 +3,10 @@
 // Get the requested page from URL
 $page = $_GET['page'] ?? 'home';
 
-// Function to load view with header and footer
-function view($name, $data = []) {
-    extract($data);
-    require_once __DIR__ . '/../views/layouts/header.php';
-    require_once __DIR__ . "/../views/{$name}.php";
-    require_once __DIR__ . '/../views/layouts/footer.php';
-}
+// Include helper functions
+require_once __DIR__ . '/helpers.php';
 
-// Function to redirect
-function redirect($page) {
-    header("Location: ?page={$page}");
-    exit();
-}
-
-// Simple router without database dependency for initial testing
+// Simple router
 switch ($page) {
     case 'home':
         view('home');
@@ -47,6 +36,72 @@ switch ($page) {
         require_once __DIR__ . '/controllers/UserController.php';
         $controller = new UserController($pdo);
         $controller->logout();
+        break;
+
+    // Loan Routes
+    case 'loans':
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login');
+        }
+        require_once __DIR__ . '/controllers/LoanController.php';
+        $controller = new LoanController($pdo);
+        $controller->listLoans();
+        break;
+
+    case 'loan':
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login');
+        }
+        require_once __DIR__ . '/controllers/LoanController.php';
+        $controller = new LoanController($pdo);
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            $controller->viewLoan($id);
+        } else {
+            redirect('loans');
+        }
+        break;
+
+    case 'loan/create':
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login');
+        }
+        require_once __DIR__ . '/controllers/LoanController.php';
+        $controller = new LoanController($pdo);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $controller->create();
+        } else {
+            $controller->create();
+        }
+        break;
+
+    case 'loan/fund':
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login');
+        }
+        require_once __DIR__ . '/controllers/LoanController.php';
+        $controller = new LoanController($pdo);
+        $id = $_GET['id'] ?? null;
+        if ($id && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $controller->fund($id);
+        } else {
+            redirect('loans');
+        }
+        break;
+
+    case 'my-loans':
+        if (!isset($_SESSION['user_id'])) {
+            redirect('login');
+        }
+        require_once __DIR__ . '/controllers/LoanController.php';
+        $controller = new LoanController($pdo);
+        $controller->myLoans();
+        break;
+
+    case 'for-sale':
+        require_once __DIR__ . '/controllers/LoanController.php';
+        $controller = new LoanController($pdo);
+        $controller->forSale();
         break;
 
     case 'properties':
